@@ -269,18 +269,19 @@
 (register-handler :request-command-preview
   (u/side-effect!
     (fn [_ [_ {{:keys [command params content-command type]} :content
-               :keys [message-id chat-id on-requested] :as message}]]
-      (let [path     [(if (= :response (keyword type)) :responses :commands)
-                      (if content-command content-command command)
-                      :preview]
-            params   {:parameters params
-                      :context    (merge {:platform platform/platform} i18n/delimeters)}
-            callback #(do (when-let [result (get-in % [:result :returned])]
-                            (dispatch [:set-in [:message-data :preview message-id]
-                                       (if (string? result)
-                                         result
-                                         (cu/generate-hiccup result))]))
-                          (when on-requested (on-requested %)))]
+               :keys [message-id chat-id on-requested] :as message} data-type]]
+      (let [data-type (or data-type :preview)
+            path      [(if (= :response (keyword type)) :responses :commands)
+                       (if content-command content-command command)
+                       data-type]
+            params    {:parameters params
+                       :context    (merge {:platform platform/platform} i18n/delimeters)}
+            callback  #(do (log/debug "ALWX RES" data-type %) (when-let [result (get-in % [:result :returned])]
+                             (dispatch [:set-in [:message-data data-type message-id]
+                                        (if (string? result)
+                                          result
+                                          (cu/generate-hiccup result))]))
+                           (when on-requested (on-requested %)))]
         (status/call-jail chat-id path params callback)))))
 
 (register-handler :set-command-parameter
