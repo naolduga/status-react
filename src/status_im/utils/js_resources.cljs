@@ -6,7 +6,8 @@
 
 (def commands-js (slurp "resources/commands.js"))
 (def console-js (slurp "resources/console.js"))
-(def status-js (slurp "resources/status.js"))
+(def status-js (str (slurp "resources/status.js")
+                    (slurp "resources/i18n.js")))
 (def wallet-js (str commands-js (slurp "resources/wallet.js")))
 (def dapp-js (str (slurp "resources/dapp.js")))
 

@@ -12,7 +12,7 @@ function wallet(params, context) {
         }
     }
 
-    return {webViewUrl: url};
+    status.browse(url);
 }
 
 status.command({

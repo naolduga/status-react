@@ -710,7 +710,7 @@ function browseSuggestions(params) {
             url = 'http://' + url;
         }
 
-        return {webViewUrl: url};
+        status.browse(url);
     }
 }
 
