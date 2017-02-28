@@ -5,7 +5,9 @@
 (def default-contacts (json->clj (slurp "resources/default_contacts.json")))
 
 (def commands-js (slurp "resources/commands.js"))
-(def console-js (slurp "resources/console.js"))
+(def console-js (str (slurp "resources/console/translations.js")
+                     (slurp "resources/console/web3_metadata.js")
+                     (slurp "resources/console/console.js")))
 (def status-js (str (slurp "resources/status.js")
                     (slurp "resources/i18n.js")))
 (def wallet-js (str commands-js (slurp "resources/wallet.js")))
