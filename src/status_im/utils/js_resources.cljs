@@ -1,16 +1,22 @@
 (ns status-im.utils.js-resources
-  (:require-macros [status-im.utils.slurp :refer [slurp]])
+  (:require-macros [status-im.utils.slurp :refer [slurp slurp-bot]])
   (:require [status-im.utils.types :refer [json->clj]]))
 
 (def default-contacts (json->clj (slurp "resources/default_contacts.json")))
 
-(def commands-js (slurp "resources/commands.js"))
-(def console-js (str (slurp "resources/console/translations.js")
-                     (slurp "resources/console/web3_metadata.js")
-                     (slurp "resources/console/console.js")))
+(def wallet-js (slurp-bot :wallet))
+
+(def console-js (slurp-bot :console "web3_metadata.js"))
+
+(def browse-js (slurp-bot :browse))
+
+(def mailman-js (slurp-bot :mailman ))
+
+(def commands-js wallet-js)
+
 (def status-js (str (slurp "resources/status.js")
                     (slurp "resources/i18n.js")))
-(def wallet-js (str commands-js (slurp "resources/wallet.js")))
+
 (def dapp-js (str (slurp "resources/dapp.js")))
 
 (def webview-js (slurp "resources/webview.js"))
