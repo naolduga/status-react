@@ -172,8 +172,8 @@
    :height 44})
 
 (def container-chat-list
-  {:width  48
-   :height 48})
+  {:width  40
+   :height 40})
 
 (def container-menu-item
   {:width  32

@@ -43,7 +43,11 @@
       trigger]]
     [menu {:onSelect #(when % (do (%) nil))}
      [menu-trigger trigger]
-     [menu-options st/context-menu
-      (for [option options]
+     [menu-options st/context-menu-options
+      (for [{:keys [style] :as option} options]
         ^{:key option}
-        [menu-option option])]]))
+        [menu-option (merge option
+                            (update-in st/context-menu-option
+                                       [:customStyles :optionText]
+                                       merge
+                                       style))])]]))

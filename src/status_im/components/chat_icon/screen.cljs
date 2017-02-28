@@ -24,8 +24,7 @@
                      (get resources/contacts))
                 {:uri photo-path})]
     [image {:source photo
-            :style  (merge st/default-image-style
-                           (st/image-style size))}]))
+            :style  (st/image-style size)}]))
 
 (defn dapp-badge [styles]
   [view (:online-view-wrapper styles)

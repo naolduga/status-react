@@ -18,7 +18,8 @@
      [text {:style st/letter-text} letter])])
 
 (defn options-btn [contact more-options]
-  (let [options [{:value #(dispatch [:hide-contact contact]) :text (label :t/delete-contact)}]]
+  (let [options [{:value #(dispatch [:hide-contact contact]) :text (label :t/delete-contact)
+                  :style st/delete-contact-text}]]
     [view st/more-btn
      [context-menu
       [icon :options_gray]
@@ -38,6 +39,4 @@
        [letter-view letter])
      [contact-inner-view {:contact contact :info info}]
      (when extended?
-       [options-btn contact extend-options])]
-    [view st/contact-separator-container
-     [view (get-in platform-specific [:component-styles :contacts :separator])]]]])
+       [options-btn contact extend-options])]]])
